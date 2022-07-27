@@ -10,6 +10,9 @@ app = FastAPI()
 def read_root():
     return {"This is": "a test"}
 
+@app.get("/encoded/{data}")
+def base64data(data:str):
+    return {"got":data}
 
 @app.post("/upload/")
 async def upload(file:bytes=File()):#: bytes = File()):
