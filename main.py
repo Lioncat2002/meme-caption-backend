@@ -1,6 +1,7 @@
 import os
 import io
-from fastapi import FastAPI, UploadFile
+import base64
+from fastapi import FastAPI, File, UploadFile
 
 app = FastAPI()
 
@@ -10,10 +11,12 @@ def read_root():
     return {"This is": "a test"}
 
 
-@app.get("/upload/{file}")
-def upload(file: str):
+@app.post("/upload/")
+async def upload(file:bytes=File()):#: bytes = File()):
     # TODO: Pass the base64 file to the ml model
-    return {"file": "uploaded"}
+    with open("tmp/test.png", "wb") as fo:
+        fo.write(file)
+    return {"file": "file uploaded"}
     # contents = file.file.read()
     # if not file.filename.lower().endswith((".jpg", ".jpeg", ".png", ".bmp", ".tiff")):
     #    return {"error": "File is not an image"}

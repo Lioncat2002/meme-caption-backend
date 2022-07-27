@@ -6,6 +6,7 @@ fastapi==0.78.0
 h11==0.13.0
 httptools==0.4.0
 idna==3.3
+pybase64==1.2.2
 pydantic==1.9.1
 python-dotenv==0.20.0
 python-multipart==0.0.5
