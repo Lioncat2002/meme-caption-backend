@@ -21,14 +21,12 @@ async def upload(file:bytes=File()):#: bytes = File()):
      #if not file.filename.lower().endswith((".jpg", ".jpeg", ".png", ".bmp", ".tiff")):
      #   return {"error": "File is not an image"}
     # TODO: Add a function call here to the ML model which will accept the file object
-     f = io.TextIOWrapper(
-        file
-     )  # to convert the UploadFile into a python file object
+     
     # temporary code to write image on to the disk
      if not os.path.exists("tmp"):
         os.makedirs("tmp")
      with open("tmp/img.jpeg", "wb") as f:
         f.write(contents)
 
-        return {"filename": file.filename}
+        return {"file": "uploaded"}
     # Possibly make it so that this single endpoint returns caption?
