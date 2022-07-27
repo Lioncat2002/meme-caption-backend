@@ -28,5 +28,5 @@ async def upload(file:bytes=File()):#: bytes = File()):
      with open("tmp/img.jpeg", "wb") as f:
         f.write(contents)
 
-        return {"file": "uploaded"}
+     return {"file": "uploaded"}
     # Possibly make it so that this single endpoint returns caption?
