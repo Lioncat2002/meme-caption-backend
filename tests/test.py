@@ -11,4 +11,4 @@ files = {
 }
 
 response = requests.post('http://127.0.0.1:8000/image/', headers=headers, files=files)
-print(response.json())
+print(response.text)

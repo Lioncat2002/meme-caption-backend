@@ -1,5 +1,6 @@
 import os
 import io
+import tempfile
 import base64
 from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
@@ -26,10 +27,9 @@ async def base64data(data:ImageData):
 @app.post("/image/")
 async def imageupload(data:UploadFile):
     print("Success")
-    data=await data.read()
-    #f=io.BytesIO(data)
-    with open("tmp/test.png","wb") as fs:
-        fs.write(data)
+    f=data.file
+    with open("tmp/image.jpg","wb") as fs:
+        fs.write(f.read())
     return {"got":"success"}
 
 @app.post("/upload/")
