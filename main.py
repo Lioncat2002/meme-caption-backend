@@ -28,6 +28,8 @@ async def base64data(data:ImageData):
 async def imageupload(data:UploadFile):
     print("Success")
     f=data.file
+    if not os.path.exists("tmp"):
+        os.makedirs("tmp")
     with open("tmp/image.jpg","wb") as fs:
         fs.write(f.read())
     return {"got":"success"}
