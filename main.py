@@ -2,8 +2,12 @@ import os
 import io
 import base64
 from fastapi import FastAPI, File, UploadFile
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class ImageData(BaseModel):
+    data:str
 
 
 @app.get("/")
@@ -11,8 +15,7 @@ def read_root():
     return {"This is": "a test"}
 
 @app.post("/encoded/")
-async def base64data(data:str):
-    data=data
+async def base64data(data:ImageData):
     return {"got":data}
 
 @app.post("/upload/")
