@@ -17,7 +17,20 @@ def read_root():
 @app.post("/encoded/")
 async def base64data(data:ImageData):
     print("Success")
+    data=base64.urlsafe_b64decode(data.data)
+    #f=io.BytesIO(data)
+    with open("tmp/test.png","wb") as fs:
+        fs.write(data)
     return {"got":data}
+
+@app.post("/image/")
+async def imageupload(data:UploadFile):
+    print("Success")
+    data=await data.read()
+    #f=io.BytesIO(data)
+    with open("tmp/test.png","wb") as fs:
+        fs.write(data)
+    return {"got":"success"}
 
 @app.post("/upload/")
 async def upload(file:bytes=File()):#: bytes = File()):
