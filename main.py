@@ -16,6 +16,7 @@ def read_root():
 
 @app.post("/encoded/")
 async def base64data(data:ImageData):
+    print("Success")
     return {"got":data}
 
 @app.post("/upload/")
