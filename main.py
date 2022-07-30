@@ -18,11 +18,17 @@ def read_root():
 @app.post("/encoded/")
 async def base64data(data:ImageData):
     print("Success")
-    data=base64.urlsafe_b64decode(data.data)
+    d=base64.b64decode(data.data.encode('utf-8'))
+    f=io.BytesIO(d)
+    f=Image.open(f) #PIL image
+    #f.show()
+    if not os.path.exists("tmp"):
+        os.makedirs("tmp")
+    with open("tmp/t.png","wb") as fs:
+        fs.write(d)
     #f=io.BytesIO(data)
-    return {"got":data}
-    with open("tmp/test.png","wb") as fs:
-        fs.write(data)
+    return {"got":"ze file"}
+
     
 
 @app.post("/image/")
