@@ -43,7 +43,7 @@ async def base64data(data:ImageData):
     
 
 @app.post("/image/")
-async def imageupload(data:UploadFile=File(...)):
+async def imageupload(data:UploadFile=File(...,media_type="image/*")):
     print("Success")
     f=data.file
     if not os.path.exists("tmp"):
