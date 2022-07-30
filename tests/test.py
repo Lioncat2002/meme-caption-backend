@@ -6,7 +6,7 @@ headers = {
     # Already added when you pass json= but not when you pass data=
     # 'Content-Type': 'application/json',
 }
-s=base64.b64encode(open("images/noita.jpg","rb").read()
+s=base64.b64encode(open("images/noita.jpg","rb").read())
 
 json_data = {
     'data': s.decode('utf-8'),

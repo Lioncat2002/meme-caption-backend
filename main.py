@@ -43,15 +43,15 @@ async def base64data(data:ImageData):
     
 
 @app.post("/image/")
-async def imageupload(data:UploadFile=File(...,media_type="image/*")):
-    print("Success")
-    f=data.file
-    if not os.path.exists("tmp"):
-        os.makedirs("tmp")
-    with open("tmp/image.jpg","wb") as fs:
-        fs.write(f.read())
-    f=Image.open(f)
-    f.show()
+async def imageupload(data:UploadFile=File(...)):
+    #print("Success")
+    #f=data.file
+    #if not os.path.exists("tmp"):
+    #    os.makedirs("tmp")
+    #with open("tmp/image.jpg","wb") as fs:
+    #    fs.write(f.read())
+    #f=Image.open(f)
+    #f.show()
     return {"got":"success"}
 
 @app.post("/upload/")
