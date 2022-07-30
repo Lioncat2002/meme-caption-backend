@@ -5,7 +5,18 @@ import base64
 from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 from PIL import Image
+from fastapi.middleware.cors import CORSMiddleware
+
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ImageData(BaseModel):
     data:str
@@ -32,7 +43,7 @@ async def base64data(data:ImageData):
     
 
 @app.post("/image/")
-async def imageupload(data:UploadFile):
+async def imageupload(data:UploadFile=File(...)):
     print("Success")
     f=data.file
     if not os.path.exists("tmp"):
