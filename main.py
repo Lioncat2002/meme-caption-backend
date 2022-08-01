@@ -1,10 +1,11 @@
 import os
 import io
-import tempfile
 import base64
 from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 from PIL import Image
+import torch
+import torchvision.transforms as transforms
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -45,13 +46,23 @@ async def base64data(data:ImageData):
 @app.post("/image/")
 async def imageupload(data:UploadFile=File(...)):
     print("Success")
+    
+    #checking if the uplaoded file is image or not
+    if not data.filename.lower().endswith((".jpg", ".jpeg", ".png", ".bmp", ".tiff")):
+        return {"error": "File is not an image"}
+
     f=data.file
+    #Temporary code to write image to drive
     if not os.path.exists("tmp"):
         os.makedirs("tmp")
     with open("tmp/image.jpg","wb") as fs:
         fs.write(f.read())
     f=Image.open(f)
-    f.show()
+    transform=transforms.Compose([
+        transforms.PILToTensor()
+    ])
+    img_tensor=transform(f)
+    #f.show()
     return {"got":"success"}
 
 @app.post("/upload/")
