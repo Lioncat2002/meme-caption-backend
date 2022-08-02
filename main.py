@@ -1,10 +1,7 @@
 import os
-import io
-import base64
 from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
 from PIL import Image
-import torch
 import torchvision.transforms as transforms
 from fastapi.middleware.cors import CORSMiddleware
 
